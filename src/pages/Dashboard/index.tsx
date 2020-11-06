@@ -35,14 +35,14 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadProducts(): Promise<void> {
-      // TODO
+      const { data } = await api.get('/products');
+      setProducts(data);
     }
-
     loadProducts();
   }, []);
 
   function handleAddToCart(item: Product): void {
-    // TODO
+    addToCart(item);
   }
 
   return (
@@ -52,9 +52,7 @@ const Dashboard: React.FC = () => {
           data={products}
           keyExtractor={item => item.id}
           ListFooterComponent={<View />}
-          ListFooterComponentStyle={{
-            height: 80,
-          }}
+          ListFooterComponentStyle={{ height: 80 }}
           renderItem={({ item }) => (
             <Product>
               <ProductImage source={{ uri: item.image_url }} />
